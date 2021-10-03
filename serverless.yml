@@ -1,0 +1,38 @@
+service: honeydew-alexa
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  region: ${opt:region, self:provider.region}
+  stages:
+    - development
+    - staging
+    - production
+provider:
+  name: aws
+  runtime: nodejs10.x
+  timeout: 24
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "arn:aws:lambda:us-east-1::function:honeydew-alexa-${opt:stage}-index"
+  environment:
+    NODE_ENV: ${file(./.env.yml):${opt:stage}.NODE_ENV}
+    PARSE_APP_ID: ${file(./.env.yml):${opt:stage}.PARSE_APP_ID}
+    PARSE_JS_KEY: ${file(./.env.yml):${opt:stage}.PARSE_JS_KEY}
+    PARSE_MASTER_KEY: ${file(./.env.yml):${opt:stage}.PARSE_MASTER_KEY}
+    PARSE_SERVER_URL: https://api.danepowell.com/honeydew-${opt:stage}/parse
+functions:
+  index:
+    handler: index.handler
+    events:
+      - alexaSkill: amzn1.ask.skill.04bd5e20-7f56-47e3-87cd-504a20c82729
+      - schedule:
+          name: honeydew-alexa-${opt:stage}-warmer
+          rate: rate(5 minutes)
+          enabled: true
+          input:
+            warmer: true
+            concurrency: 1
+plugins:
+  - serverless-stage-manager
+  - serverless-version-tracker

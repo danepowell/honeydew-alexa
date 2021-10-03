@@ -1,0 +1,30 @@
+{
+  "session": {
+    "sessionId": "SessionId.",
+    "application": {
+      "applicationId": "amzn1.echo-sdk-ams.app."
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.",
+      "accessToken": "r:"
+    },
+    "new": true
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.",
+    "locale": "en-US",
+    "timestamp": "2016-09-10T23:36:49Z",
+    "intent": {
+      "name": "AddItemIntent",
+      "slots": {
+        "item": {
+          "name": "item",
+          "value": "test"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

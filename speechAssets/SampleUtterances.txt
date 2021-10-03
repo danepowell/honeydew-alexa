@@ -1,0 +1,11 @@
+AddItemIntent add {Item}
+AddItemIntent add {Item} to my list
+AddItemIntent add {Item} to my grocery list
+AddItemIntent add {Item} to the list
+AddItemIntent add {Item} to the grocery list
+AddItemIntent put {Item} on my list
+AddItemIntent put {Item} on my grocery list
+AddItemIntent put {Item} on the list
+AddItemIntent put {Item} on the grocery list
+
+HelpIntent help
